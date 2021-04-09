@@ -18,3 +18,7 @@ Django项目创建：
 ⑨ 创建（迁移数据）数据库， python manage.py migrate
 ⑩ 启动服务指定端口， python manage.py runserver 8080
 ⑪ 创建Django应用程序，python manage.py startapp
+⑫ models.py 文件创建了数据模型后 使用python manage.py makemigrations learing_logs来修改数据库。生成了0001_initial.py文件，这个文件
+将在数据库中为模型Topic创建一个表
+⑬ 使用命令 python manage.py migrate 修改数据库
+⑭ 创建超级用户使用django自带的admin功能进行后台管理 命令:python manage.py createsuperuser
