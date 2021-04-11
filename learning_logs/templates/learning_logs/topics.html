@@ -1,0 +1,23 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+{% extends "learning_logs/base.html" %}
+
+{% block content %}
+
+    <p>Topics</p>
+    <ul>
+<!--        遍历字典context中的列表topics-->
+        {% for topic in topics %}
+<!--        双花括号代表 使用变量-->
+            <li>
+<!--                实现点击具体的 主题跳转相应页面-->
+                <a href="{% url 'learning_logs:topic' topic.id %}"> {{ topic }}</a>
+            </li>
+<!--        遇到for循环中 值为空时 给出提示-->
+        {% empty %}
+            <li>Np topics have been added yet.</li>
+<!--        结束for循环-->
+        {% endfor %}
+
+    </ul>
+
+{% endblock content%}

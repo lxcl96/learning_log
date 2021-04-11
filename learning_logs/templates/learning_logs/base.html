@@ -1,0 +1,10 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<p>
+<!--    {% url 'learning_logs:index' %} 即为超链接 learning_logs为urls中的app_name, index为自己定义的name -->
+    <a href="{% url 'learning_logs:index' %}">Learning Log</a> -
+    <a href="{% url 'learning_logs:topics' %}">Topics</a>
+</p>
+
+{% block content %}{% endblock content %}
+
+<!--{% block test %}{% endblock test%}-->

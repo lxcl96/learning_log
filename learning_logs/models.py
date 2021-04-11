@@ -33,7 +33,10 @@ class Entry(models.Model):
     def __str__(self):
         """返回模型的字符串表示"""
         # 只显示前50个字符，点击显示全部
-        return f"{self.text[:50]}..."
+        if len(self.text) >= 50:
+            return f"{self.text[:50]}..."
+        else:
+            return self.text
 
 
 
