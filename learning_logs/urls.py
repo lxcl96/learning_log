@@ -22,5 +22,7 @@ urlpatterns = [
     # 第二部分 /<int:topic_id>/ 与包含在两个斜杠内的整数匹配，并将这个整数存储在一个名为topic_id的参数中
     # 主要目的是为了 将具体某条信息的 id即topic_id 传递给 view中的 topic函数
     path('topics/<int:topic_id>/', views.topic, name='topic'),
+    # 用于添加新主题的页面
+    path('new_topic/', views.new_topic, name='new_topic'),
 
 ]
