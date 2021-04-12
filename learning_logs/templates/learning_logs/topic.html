@@ -1,6 +1,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-{% extends 'learning_logs/base.html' %}
+{% extends "learning_logs/base.html" %}
 {% block content %}
 <!--    上下文字典传递的 topic 直接拿过来用-->
     <p>Topic: {{ topic }}</p>
@@ -16,5 +16,10 @@
         {% empty %}
             <li>There are no entries for this topic yet.</li>
         {% endfor %}
+
+        <p>
+            <!--# 页面上提供id都是 topic.id 视图里都是变量 topic_id-->
+            <a href="{% url 'learning_logs:new_entry' topic.id %}">Add new entry.</a>
+        </p>
     </ul>
 {% endblock content%}

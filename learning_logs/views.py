@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Topic
-from .forms import TopicForm
+from .forms import TopicForm, EntryForm
 
 
 # Create your views here.
@@ -49,3 +49,26 @@ def new_topic(request):
     # 显示空表单或者表单数据无效
     context = {'form': form}
     return render(request, 'learning_logs/new_topic.html', context)
+
+
+def new_entry(request, topic_id):
+    """在特定的主题添加新条目"""
+    # 获取要增加条目的 主题
+    topic = Topic.objects.get(id=topic_id)
+    if request.method != 'POST':
+        form = EntryForm()
+    else:
+        # 表单数据来自于 页面提交
+        form = EntryForm(data=request.POST)
+        if form.is_valid():
+            # 有外键约束的不仅仅要存储 表单数据 而且还要存储 外键topic 以便将其关联起来
+            # commit=False 让django创建一个新的条目但是不存储到数据库
+            new_entry = form.save(commit=False)
+            # 将要增加的条目关联到主题上
+            new_entry.topic = topic
+            new_entry.save()
+            # 将其重定向到 格式为【appname：urlname】 因为这个视图函数需要两个参数，所以再传递一个topic值
+            return redirect('learning_logs:topic', topic_id=topic_id)
+    # 传递 主题和 条目
+    context = {'topic': topic, 'form': form}
+    return render(request, 'learning_logs/new_entry.html', context)

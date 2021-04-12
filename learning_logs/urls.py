@@ -25,4 +25,9 @@ urlpatterns = [
     # 用于添加新主题的页面
     path('new_topic/', views.new_topic, name='new_topic'),
 
+    # 创建条目时需要用到topic的id来判断是哪一个话题
+    # 代码<int:topic_id>捕获一个数值，并将其赋给变量topic_id
+    # 当请求的URL与这个模式匹配时，django将请求和主题的id发送给函数new_entry()
+    path('new_entry/<int:topic_id>/', views.new_entry, name='new_entry'),
+
 ]

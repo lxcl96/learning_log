@@ -3,7 +3,7 @@
 # @File : forms.py.py
 # @Software : PyCharm
 from django import forms
-from .models import Topic
+from .models import Topic, Entry
 
 
 class TopicForm(forms.ModelForm):
@@ -14,4 +14,13 @@ class TopicForm(forms.ModelForm):
         fields = ['text']
         # 让django 不要为text生成标签
         labels = {'text': ''}
-        
+
+
+class EntryForm(forms.ModelForm):
+    class Meta:
+        model = Entry
+        fields = ['text']
+        labels = {'text': ''}
+        # 定义一个小部件widgets，这是一个html表单元素，如单行文本框，多行文本区域或下拉列表
+        # 通过自定义小组件来覆盖django默认的小组件，将文本区域的宽度设置为80列而不是默认的40列
+        widgets = {'text': forms.Textarea(attrs={'cols': 80})}

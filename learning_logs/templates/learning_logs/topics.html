@@ -10,6 +10,7 @@
 <!--        双花括号代表 使用变量-->
             <li>
 <!--                实现点击具体的 主题跳转相应页面-->
+                <!--# 页面上提供id都是 topic.id 视图里都是变量 topic_id-->
                 <a href="{% url 'learning_logs:topic' topic.id %}"> {{ topic }}</a>
             </li>
 <!--        遇到for循环中 值为空时 给出提示-->

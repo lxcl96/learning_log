@@ -1,0 +1,21 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+{% extends "learning_logs/base.html" %}
+
+{% block content %}
+
+<p>
+    <!--# 页面上提供id都是 topic.id 视图里都是变量 topic_id-->
+    <a href="{% url 'learning_logs:topic' topic.id %}" > {{ topic }}</a>
+</p>
+
+<p>Add a entry: </p>
+
+<!--# 页面上提供id都是 topic.id 视图里都是变量 topic_id-->
+<form action="{% url 'learning_logs:new_entry' topic.id %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">Add entry</button>
+</form>
+
+{% endblock content%}
