@@ -1,0 +1,21 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--# 一个应用程序的模板可以继承另一个应用程序的模板-->
+{% extends "learning_logs/base.html" %}
+
+{% block content %}
+
+    {% if form.errors %}
+        <p>Your username and password didn't match.Please try again.</p>
+    {% endif %}
+
+    <form action="{% url 'users:login' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button name="submit">Log in</button>
+<!--        # 包含一个隐藏的表单元素 next，其中实参value告诉django 用户成功登陆后将其重定向到哪里去了。-->
+        <input type="hidden" name="text" value="{% url 'learning_logs:index' %}"/>
+
+    </form>
+
+{% endblock content%}

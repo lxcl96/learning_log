@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # 我的应用程序,将其放在前面可以覆盖默认应用程序
     'learning_logs',
+    'users',
     # 系统默认应用
     'django.contrib.admin',
     'django.contrib.auth',

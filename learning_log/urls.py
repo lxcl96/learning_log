@@ -18,5 +18,9 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('learning_logs.urls'))
+    # 根据app来区分 这个是users
+    path('users/', include('users.urls')),
+    # 这个是 learning_logs 因为默认是 ''
+    path('', include('learning_logs.urls')),
+
 ]

@@ -11,7 +11,11 @@
 <!--                django模板中，| 代表过滤器 此处代表使用 下面的时间格式-->
                 <p>{{ entry.date_added|date:'M d, Y H:i' }}</p>
 <!--                此处过滤器linebreaks 将包含换行符的长条目转换为浏览器能够理解的格式，以免显示的为不换行的文本块。-->
-                <p>{{ entry.text|linebreaks }}</p>
+                <p>
+                    {{ entry.text|linebreaks }}
+                </p>
+<!--                要在 li 里面不然一直都是只能修改最后一个-->
+                <a href="{% url 'learning_logs:edit_entry' entry.id %}">Edit entry</a>
             </li>
         {% empty %}
             <li>There are no entries for this topic yet.</li>

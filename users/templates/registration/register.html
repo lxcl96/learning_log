@@ -1,0 +1,15 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+{% extends "learning_logs/base.html" %}
+
+{% block content %}
+
+    <form method="post" action="{% url 'users:register' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button name="submit">Register</button>
+<!--        # 告诉django成功注册重定向到何处去了-->
+        <input type="hidden" name="next" value="{% url 'learning_logs:index' %}"/>
+    </form>
+
+{% endblock content %}

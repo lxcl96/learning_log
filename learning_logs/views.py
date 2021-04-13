@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Topic
+from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
 
 
@@ -68,7 +68,27 @@ def new_entry(request, topic_id):
             new_entry.topic = topic
             new_entry.save()
             # 将其重定向到 格式为【appname：urlname】 因为这个视图函数需要两个参数，所以再传递一个topic值
-            return redirect('learning_logs:topic', topic_id=topic_id)
+            return redirect('learning_logs:topic', topic_id=topic.id)
     # 传递 主题和 条目
     context = {'topic': topic, 'form': form}
     return render(request, 'learning_logs/new_entry.html', context)
+
+
+def edit_entry(request, entry_id):
+    """实现编辑既有tupic下的内容"""
+    entry = Entry.objects.get(id=entry_id)
+    topic = entry.topic
+
+    if request.method != 'POST':
+        # 在已有的条目上编辑 用既有信息去填充它
+        form = EntryForm(instance=entry)
+    else:
+        # 在已有的条目上编辑，但是最后是保存用户提交的
+        form = EntryForm(instance=entry, data=request.POST)
+        if form.is_valid():
+            form.save()
+            # 保存表单后重定向到topic页面 需要传递id找出是哪一个
+            return redirect('learning_logs:topic', topic_id=topic.id)
+    # 这儿传递的 都是html用的到的
+    context = {'entry': entry, 'topic': topic, 'form': form}
+    return render(request, 'learning_logs/edit_entry.html', context)

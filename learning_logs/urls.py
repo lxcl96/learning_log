@@ -29,5 +29,6 @@ urlpatterns = [
     # 代码<int:topic_id>捕获一个数值，并将其赋给变量topic_id
     # 当请求的URL与这个模式匹配时，django将请求和主题的id发送给函数new_entry()
     path('new_entry/<int:topic_id>/', views.new_entry, name='new_entry'),
+    path('edit_entry/<int:entry_id>/', views.edit_entry, name='edit_entry')
 
 ]
